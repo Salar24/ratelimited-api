@@ -19,7 +19,7 @@ func newTestRedis(t *testing.T) *redis.Client {
 		t.Skip("REDIS_ADDR not set; skipping Redis integration test")
 	}
 	c := redis.NewClient(&redis.Options{Addr: addr})
-	t.Cleanup(func() { c.Close() })
+	t.Cleanup(func() { _ = c.Close() })
 	if err := c.Ping(context.Background()).Err(); err != nil {
 		t.Fatalf("redis ping: %v", err)
 	}

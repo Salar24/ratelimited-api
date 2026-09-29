@@ -68,7 +68,7 @@ func run() error {
 			return err
 		}
 		rdb := redis.NewClient(opts)
-		defer rdb.Close()
+		defer func() { _ = rdb.Close() }()
 		if err := rdb.Ping(ctx).Err(); err != nil {
 			return err
 		}

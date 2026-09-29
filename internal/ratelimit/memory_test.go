@@ -46,8 +46,8 @@ func TestMemoryRefillsOverTime(t *testing.T) {
 	m, clk := newTestMemory(Config{Rate: 2, Burst: 2})
 	ctx := context.Background()
 
-	m.Allow(ctx, "k")
-	m.Allow(ctx, "k")
+	_, _ = m.Allow(ctx, "k")
+	_, _ = m.Allow(ctx, "k")
 	if res, _ := m.Allow(ctx, "k"); res.Allowed {
 		t.Fatal("bucket should be empty")
 	}
@@ -87,9 +87,9 @@ func TestMemorySweepRemovesIdleBuckets(t *testing.T) {
 	m, clk := newTestMemory(Config{Rate: 1, Burst: 5})
 	ctx := context.Background()
 
-	m.Allow(ctx, "old")
+	_, _ = m.Allow(ctx, "old")
 	clk.advance(3 * time.Second)
-	m.Allow(ctx, "recent")
+	_, _ = m.Allow(ctx, "recent")
 	clk.advance(2 * time.Second) // "old" idle 5s (== refill time), "recent" idle 2s
 
 	if n := m.Sweep(); n != 1 {
