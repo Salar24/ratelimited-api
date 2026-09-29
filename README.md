@@ -6,6 +6,8 @@
 
 A URL-shortening API in Go built around a **distributed token-bucket rate limiter**. Limits are enforced atomically in Redis, so they hold no matter how many replicas are running. The stack includes Postgres storage, Prometheus metrics, a provisioned Grafana dashboard, and an end-to-end CI check that proves the limit is shared across instances.
 
+> ☸️ **Kubernetes deployment:** see [**k8s-platform**](https://github.com/Salar24/k8s-platform) for the Helm chart, ArgoCD GitOps setup, and end-to-end tests on a multi-node cluster.
+
 ## Architecture
 
 ```mermaid
