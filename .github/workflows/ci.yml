@@ -8,6 +8,12 @@ on:
 permissions:
   contents: read
 
+# Explicit bash enables pipefail; the implicit default shell does not, so a
+# failure on the left of a pipe (e.g. `terraform test | tee`) would be ignored.
+defaults:
+  run:
+    shell: bash
+
 jobs:
   test:
     name: Lint & test
